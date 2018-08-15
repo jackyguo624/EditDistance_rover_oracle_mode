@@ -116,15 +116,9 @@ def oracle_mode(args):
 def other_mode(args):
     ctm, trans, out = args.ctm, args.trans, args.out
     hyps = get_hyp_iter(ctm)
-    outf = open(os.path.join(out, "hyp.txt"), 'w')
     for key, hyp in hyps:
-        outf.write("{} {}\n".format(key, " ".join([h[0] for h in hyp])))
-    outf.close()
-    os.system("awk -f filter.awk {} > {}".format(os.path.join(out, "hyp.txt"), os.path.join(out,"hyp.char")))
-    os.system("compute-wer --text --mode=present ark:{} ark:{} > {}".format(
-        trans,
-        os.path.join(out, "hyp.char"),
-        os.path.join(out, "wer") ))
+	ref = refs[key]
+	score = EdirDis.minDistance(ref, hyp)
 
 
 def main():

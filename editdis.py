@@ -103,4 +103,4 @@ class EditDis:
                                dp[i-1][j-1] + (0 if ref[i-1] in hyp[j-1] else 1),
                                ) ))
 
-        return dp[m-1][n-1] / len(ref), EditDis.backtrace(bt, ref, hyp), len(ref
+        return dp[m-1][n-1] / len(ref), EditDis.backtrace(bt, ref, hyp), len(ref)
